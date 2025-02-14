@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import styles from "./MealItem.module.scss";
 import MealItemForm from "./MealItemForm";
+import CartContext from "../../context/cart-context";
 
 const MealItem = ({ id, price, description, name }) => {
   const { meal, description: desc, price: priceStyle } = styles;
 
   const formatPrice = new Intl.NumberFormat("ko-KR").format(price);
+
+  const { addToCartItem,totalPrice } = useContext(CartContext);
 
   // 장바구니 배열에 데이터를 쌓기 위해 배열로 객체 전달
   // 수량정보를 MealItemForm에서 가져와야함
@@ -19,6 +22,8 @@ const MealItem = ({ id, price, description, name }) => {
       amount: +amount,
       price: price * +amount,
     };
+
+    addToCartItem(cartItem,cartItem.price);
   };
 
   return (
