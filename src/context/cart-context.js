@@ -9,6 +9,7 @@ const CartContext = createContext({
 
   cartItems: [], // 장바구니목록
   addToCartItem: (newItem) => {}, // cartItem에 데이터 추가 함수
+  removeToCartItme:(item)=>{},
 
   totalPrice: 0,
 });

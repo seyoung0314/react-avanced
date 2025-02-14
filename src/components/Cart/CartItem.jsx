@@ -19,7 +19,7 @@ const CartItem = ({ cart }) => {
   const formatPrice = new Intl.NumberFormat('ko-KR').format(price);
 
 
-  const { addToCartItem } = useContext(CartContext);
+  const { addToCartItem, removeToCartItme } = useContext(CartContext);
 
   const handleAddClick = (e)=>{
     const preAmount = amount;
@@ -32,6 +32,10 @@ const CartItem = ({ cart }) => {
     };
     addToCartItem(cartItem,Math.floor(price/+preAmount))
   }
+
+  const handleSubClick = e =>{
+    removeToCartItme(id)
+  }
   
   return (
     <li className={cartItem}>
@@ -43,7 +47,7 @@ const CartItem = ({ cart }) => {
         </div>
       </div>
       <div className={actions}>
-        <button>−</button>
+        <button onClick={handleSubClick}>−</button>
         <button onClick={handleAddClick}>+</button>
       </div>
     </li>
