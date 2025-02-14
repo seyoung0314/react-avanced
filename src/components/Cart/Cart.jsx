@@ -14,12 +14,13 @@ const Cart = () => {
   } = styles;
 
   const { closeModal, cartItems,totalPrice } = useContext(CartContext);
+console.log("sss",cartItems);
 
   return (
     <CartModal onClose={closeModal}>
       {/* 주문 내역 */}
       <ul className={cartItemStyle}>
-        {cartItems.map((cartItem) => (
+        {cartItems?.map((cartItem) => (
           <CartItem key={cartItem.id} cart={cartItem} />
         ))}
       </ul>

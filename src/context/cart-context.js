@@ -7,7 +7,7 @@ const CartContext = createContext({
   openModal: () => {}, // 모달 열어주는 함수
   closeModal: () => {},
 
-  cartIems: [], // 장바구니목록
+  cartItems: [], // 장바구니목록
   addToCartItem: (newItem) => {}, // cartItem에 데이터 추가 함수
 
   totalPrice: 0,

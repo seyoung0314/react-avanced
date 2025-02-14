@@ -8,7 +8,7 @@ const MealItem = ({ id, price, description, name }) => {
 
   const formatPrice = new Intl.NumberFormat("ko-KR").format(price);
 
-  const { addToCartItem,totalPrice } = useContext(CartContext);
+  const { addToCartItem } = useContext(CartContext);
 
   // 장바구니 배열에 데이터를 쌓기 위해 배열로 객체 전달
   // 수량정보를 MealItemForm에서 가져와야함
