@@ -10,7 +10,7 @@ const MealItemForm = (props) => {
         inputAttr={{
           type: "text",
           name: "포도",
-          onfocus: () => console.log("dd"),
+          onFocus: () => console.log("dd"),
         }}
       />
 

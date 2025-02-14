@@ -1,35 +1,27 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Header from "./components/Layout/Header";
 
 import "./App.css";
 import Meals from "./components/Meals/Meals";
 import Cart from "./components/Cart/Cart";
+
+import CartProvider from "./context/CartProvider";
 import CartContext from "./context/cart-context";
+import CartApp from "./components/Cart/CartApp";
 
 function App() {
-  // 장바구니 모달을 열고 닫는 상태변수
-  const [cartIsShown, setCartIsShwon] = useState(false);
 
-  //모달을 열어주는 함수
-  const handleShowCart = () => setCartIsShwon(true);
-
-    //모달을 닫아주는 함수
-    const handleHideCart = () => setCartIsShwon(false);
 
   return (
-    // 실제로 공유할 데이터는 value로 전달
-    <CartContext.Provider value={{
-      cartName : "장바구니",
-      amout : 10,
-      isOpen : false
-    }}>
-      {cartIsShown && <Cart onClose={handleHideCart}/>}
-      <Header onShowCart = {handleShowCart}
-      />
+    <CartProvider>
+      {/* 제공자랑 소비자는 같으면 안됨 */}
+      <CartApp/>
+      {/* {cartIsShown && <Cart />}
+      <Header />
       <div id="main">
         <Meals />
-      </div>
-    </CartContext.Provider>
+      </div> */}
+    </CartProvider>
   );
 }
 

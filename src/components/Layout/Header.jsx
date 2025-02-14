@@ -1,18 +1,19 @@
 import styles from "./Header.module.scss";
 
 import HeaderCartButton from "./HeaderCartButton";
+import CartContext from '../../context/cart-context';
 
 //리액트 컴포넌트에서 정적 이미지 로딩
 import foodImage from "../../assets/img/meals.jpg";
 
-const Header = ({ onShowCart }) => {
+const Header = ({  }) => {
   const { header, "main-image": mainImage } = styles;
 
   return (
     <>
       <header className={header}>
         <h1>ReactMeals</h1>
-        <HeaderCartButton onShow={onShowCart} />
+        <HeaderCartButton/>
       </header>
       <div className={mainImage}>
         <img src={foodImage} alt="맛있어 보여~" />
