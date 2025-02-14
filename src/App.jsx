@@ -1,20 +1,30 @@
-import { useState } from 'react'
-import Header from './components/Layout/Header'
+import { useState } from "react";
+import Header from "./components/Layout/Header";
 
-import './App.css'
-import Meals from './components/Meals/Meals'
+import "./App.css";
+import Meals from "./components/Meals/Meals";
+import Cart from "./components/Cart/Cart";
 
 function App() {
-  const [count, setCount] = useState(0)
+  // 장바구니 모달을 열고 닫는 상태변수
+  const [cartIsShown, setCartIsShwon] = useState(false);
+
+  //모달을 열어주는 함수
+  const handleShowCart = () => setCartIsShwon(true);
+
+    //모달을 닫아주는 함수
+    const handleHideCart = () => setCartIsShwon(false);
 
   return (
     <>
-      <Header />
+      {cartIsShown && <Cart onClose={handleHideCart}/>}
+      <Header onShowCart = {handleShowCart}
+      />
       <div id="main">
-        <Meals/>
+        <Meals />
       </div>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
