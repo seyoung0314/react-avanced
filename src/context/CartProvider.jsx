@@ -23,7 +23,6 @@ const CartProvider = ({ children }) => {
       setCartItems([...cartItems, newCartItem]);
     }
 
-
     setTotalPrice(totalPrice + amount);
   };
 
