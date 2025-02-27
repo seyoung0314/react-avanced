@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useState, memo, useCallback, useEffect } from "react";
 
 import IconButton from "../UI/IconButton";
 import MinusIcon from "../UI/Icons/MinusIcon";
@@ -26,25 +26,32 @@ const isPrime = (number) => {
 
 const Counter = ({ initialCount }) => {
   log("<Counter /> rendered", 1);
+
   const initialCountIsPrime = isPrime(initialCount);
 
   // const [counter, setCounter] = useState(initialCount);
 
   // 카운트의 변화를 배열로 추적
+  // [0, 1, -1, 1, -1, 1, 1]
+  // [{ id: 'x1', value: 0 }, { id: 'x2', value: 1 }, ...]
   const [counterChanges, setCounterChanges] = useState([
-    { id: Math.random().toString(), value: 0 },
+    { id: Math.random().toString(), value: initialCount },
   ]);
 
-  //현재 카운트의 총합
+  useEffect(() => {
+    setCounterChanges([{ id: Math.random().toString(), value: initialCount }]);
+  }, [initialCount]);
+
+  // 현재 카운트의 총합
   const currentCount = counterChanges.reduce(
     (acc, curr) => acc + curr.value,
     0
   );
 
   /*
-      useCallback 훅은 변경사항이 없는 함수를 재생성하지 않고 재사용
-      2번째 파라미터는 의존성배열로, 특정값이나 props가 변하면 재생성
-   */
+    useCallback hooks은 변경사항이 없는 함수를 재생성하지 않고 재사용하는 훅입니다.
+    2번째 파라미터에 해당하는 배열은 의존성배열로서, 특정 상태값이나 props가 변하면 함수를 재생성하도록합니다.
+  */
 
   const decrementHandler = useCallback(() => {
     setCounterChanges((prevCounterChange) => [
@@ -59,6 +66,7 @@ const Counter = ({ initialCount }) => {
       ...prevCounterChange,
     ]);
   }, []);
+
   return (
     <section className="counter">
       <p className="counter-info">
@@ -69,14 +77,17 @@ const Counter = ({ initialCount }) => {
         <IconButton icon={MinusIcon} onClick={decrementHandler}>
           Decrement
         </IconButton>
+
         <CounterOutput value={currentCount} />
+
         <IconButton icon={PlusIcon} onClick={incrementHandler}>
           Increment
         </IconButton>
       </p>
+
       <CounterHistory history={counterChanges} />
     </section>
   );
 };
-// export default React.memo(Counter);
+// export default memo(Counter);
 export default Counter;
