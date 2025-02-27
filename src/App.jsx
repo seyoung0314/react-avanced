@@ -1,41 +1,38 @@
-import { useContext, useState } from "react";
-import Header from "./components/Layout/Header";
+import React, { useState } from 'react';
 
-import "./App.css";
-import Meals from "./components/Meals/Meals";
-import Cart from "./components/Cart/Cart";
-
-import CartProvider from "./context/CartProvider";
-import CartContext from "./context/cart-context";
-import CartApp from "./components/Cart/CartApp";
-import Chat from "./components/Chat/chat";
-import { RouterProvider, useParams } from "react-router-dom";
-import router from './components/routes/router-config'
+import Counter from './optimizing/components/Counter/Counter';
+import Header from './optimizing/components/Header';
+import { log } from './optimizing/log';
+import './App.css';
 
 const App = () => {
-  return <RouterProvider router={router} />;
+  log('<App /> rendered');
+
+  const [enteredNumber, setEnteredNumber] = useState(0);
+  const [chosenCount, setChosenCount] = useState(0);
+
+  const changeHandler = e => {
+    setEnteredNumber(+e.target.value);
+  };
+
+  const setClickHandler = () => {
+    setChosenCount(enteredNumber);
+    setEnteredNumber(0);
+  };
+
+  return (
+    <>
+      <Header />
+      <main>
+        <section id="configure-counter">
+          <h2>Set Counter</h2>
+          <input type="number" onChange={changeHandler} value={enteredNumber} />
+          <button onClick={setClickHandler}>Set</button>
+        </section>
+        <Counter initialCount={chosenCount} />
+      </main>
+    </>
+  );
 };
-
-// function App() {
-
-//   const { roomCode } = useParams(); 
-// console.log(roomCode);
-
-
-//   // return (
-//   //   <>
-//   //   <Chat/>
-//   //   </>
-//   //   // <CartProvider>
-//   //   //   {/* 제공자랑 소비자는 같으면 안됨 */}
-//   //   //   <CartApp/>
-//   //   //   {/* {cartIsShown && <Cart />}
-//   //   //   <Header />
-//   //   //   <div id="main">
-//   //   //     <Meals />
-//   //   //   </div> */}
-//   //   // </CartProvider>
-//   // );
-// }
 
 export default App;
