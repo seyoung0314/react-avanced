@@ -1,3 +1,4 @@
+import { configureStore, createSlice } from "@reduxjs/toolkit";
 import { createStore } from "redux";
 
 // 액션 타입 상수
@@ -19,36 +20,40 @@ const initialState = {
  * @param {*} action - 상태를 어떻게 변경을 시킬지에 대한 명세
  * @return - 변경이 완료된 새로운 상태값
  */
-const counterReducer = (state = initialState, action) => {
-  console.log("prev-state :", state);
-  console.log("action :", action);
 
-  // 상태변경 처리
-  // 1. 상태값 변경 시 action에 들어온 type별로 다르게 처리
-  // 2. 상태값 변경은 반드시 새로운 객체를 할당해야함
+/*
+  redux toolkit에서는 reducer 대신 slice의 개념사용
 
-  switch (action.type) {
-    case INCREMENT:
-      // 기존 객체를 복사한 후 반환
-      return {...state, count: state.count + 1 };
-
-    case DECREMENT:
-      return {...state, count: state.count - 1 };
-
-    case MULTIPLY:
-      return {...state, count: state.count * action.payload };
-      
-    case TOGGLE:
-      return {...state, showCounter : !state.showCounter };
+  option객체에 들어가있는 프로퍼티 설명
+  prop1: name - 컴포넌트가 해당 리듀서를 사용할 때 부르는 이름
+  prop2: initialState - 관리할 상태값들의 초기값
+  prop3: reducers - 기존 리듀서에서 사용하던 내용들(실제 액션)
+*/
+const counterSlice = createSlice({
+  name:'counter',
+  initialState,
+  reducers: {
+    increment(state,_){
+      state.count++;
+    },
+    decrement(state,_){
+      state.count--;
+    },
+    multiply(state,action){
+      state.count *= action.payload.value;
+    },
+    toggle(state,_){
+      state.showCounter = !state.showCounter;
+    },
   }
-  return state;
-};
+});
 
 // 리덕스는 단 하나의 스토어만 사용 (앱당 하나)
 // 스토어는 최상단 컴포넌트에 제공해야한다. (여기선 app.jsx)
-const store = createStore(
-  counterReducer,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+const store = configureStore(
+  {reducer : counterSlice.reducer}
 );
 
+// 상태를 변경하는 함수들을 모두 내보내기
+export const counterActions = counterSlice.actions;
 export default store;
