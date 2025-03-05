@@ -3,6 +3,7 @@ import { createStore } from "redux";
 // 상태관리할 데이터의 초기값을 세팅
 const initialState = {
   count: 0,
+  showCounter : true,
 };
 
 // reducer : 상태관리를 위한 함수
@@ -22,19 +23,25 @@ const counterReducer = (state = initialState, action) => {
 
   switch (action.type) {
     case "INCREMENT":
-      return { count: state.count + 1 };
+      return {...state, count: state.count + 1 };
 
     case "DECREMENT":
-      return { count: state.count - 1 };
+      return {...state, count: state.count - 1 };
 
     case "MULTIPLY":
-      return { count: state.count * action.payload };
+      return {...state, count: state.count * action.payload };
+      
+    case "TOGGLE":
+      return {...state, showCounter : !state.showCounter };
   }
   return state;
 };
 
 // 리덕스는 단 하나의 스토어만 사용 (앱당 하나)
 // 스토어는 최상단 컴포넌트에 제공해야한다. (여기선 app.jsx)
-const store = createStore(counterReducer);
+const store = createStore(
+  counterReducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
 
 export default store;
