@@ -4,6 +4,7 @@ import styles from "./ReduxCounter.module.css";
 const ReduxCounter = () => {
   // 리덕스가 관리하는 상태값을 관리하기
   const count = useSelector((state) => state.count);
+  const showCounter = useSelector((state) => state.showCounter);
 
   // 리덕스의 상태변경을 위한 함수
   const dispatch = useDispatch();
@@ -25,7 +26,7 @@ const ReduxCounter = () => {
   return (
     <main className={styles.counter}>
       <h1>Redux Counter</h1>
-      <div className={styles.value}>{count}</div>
+      {showCounter && <div className={styles.value}>{count}</div>}
 
       <div style={{ marginBottom: 10 }}>
         <button style={{ marginRight: 10 }} onClick={handleDecrease}>
@@ -37,7 +38,9 @@ const ReduxCounter = () => {
         <button onClick={handleMultiply}>IncreateDouble</button>
       </div>
 
-      <button>Toggle Counter</button>
+      <button onClick={() => dispatch({ type: "TOGGLE" })}>
+        Toggle Counter
+      </button>
     </main>
   );
 };

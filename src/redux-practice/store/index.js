@@ -23,6 +23,7 @@ const counterReducer = (state = initialState, action) => {
 
   switch (action.type) {
     case "INCREMENT":
+      // 기존 객체를 복사한 후 반환
       return {...state, count: state.count + 1 };
 
     case "DECREMENT":
