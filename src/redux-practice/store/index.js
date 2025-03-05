@@ -56,7 +56,14 @@ const initialAuthState = {
 const authSlice = createSlice({
   name: "auth",
   initialState: initialAuthState,
-  reducers: {},
+  reducers: {
+    login(state,action){
+      state.isLoggedIn = true;
+    },
+    logout(state,action){
+      state.isLoggedIn = false;
+    },
+  },
 });
 
 // 리덕스는 단 하나의 스토어만 사용 (앱당 하나)
@@ -73,4 +80,5 @@ const store = configureStore({
 
 // 상태를 변경하는 함수들을 모두 내보내기
 export const counterActions = counterSlice.actions;
+export const authActions = authSlice.actions;
 export default store;
