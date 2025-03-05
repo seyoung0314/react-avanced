@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./ReduxCounter.module.css";
+import { DECREMENT, INCREMENT, MULTIPLY, TOGGLE } from "../store";
 
 const ReduxCounter = () => {
   // 리덕스가 관리하는 상태값을 관리하기
@@ -12,15 +13,15 @@ const ReduxCounter = () => {
   const handleIncrease = (e) => {
     // 리덕스에서의 상태값 변경 -> dispatch함수 사용
     // dispatch(action)
-    dispatch({ type: "INCREMENT" });
+    dispatch({ type: INCREMENT });
   };
 
   const handleDecrease = (e) => {
-    dispatch({ type: "DECREMENT" });
+    dispatch({ type: DECREMENT });
   };
 
   const handleMultiply = (e) => {
-    dispatch({ type: "MULTIPLY", payload: 3 });
+    dispatch({ type: MULTIPLY, payload: 3 });
   };
 
   return (
@@ -38,7 +39,7 @@ const ReduxCounter = () => {
         <button onClick={handleMultiply}>IncreateDouble</button>
       </div>
 
-      <button onClick={() => dispatch({ type: "TOGGLE" })}>
+      <button onClick={() => dispatch({ type: TOGGLE })}>
         Toggle Counter
       </button>
     </main>

@@ -1,5 +1,11 @@
 import { createStore } from "redux";
 
+// 액션 타입 상수
+export const INCREMENT = 'INCREMENT';
+export const DECREMENT = 'DECREMENT';
+export const MULTIPLY = 'MULTIPLY';
+export const TOGGLE = 'TOGGLE';
+
 // 상태관리할 데이터의 초기값을 세팅
 const initialState = {
   count: 0,
@@ -22,17 +28,17 @@ const counterReducer = (state = initialState, action) => {
   // 2. 상태값 변경은 반드시 새로운 객체를 할당해야함
 
   switch (action.type) {
-    case "INCREMENT":
+    case INCREMENT:
       // 기존 객체를 복사한 후 반환
       return {...state, count: state.count + 1 };
 
-    case "DECREMENT":
+    case DECREMENT:
       return {...state, count: state.count - 1 };
 
-    case "MULTIPLY":
+    case MULTIPLY:
       return {...state, count: state.count * action.payload };
       
-    case "TOGGLE":
+    case TOGGLE:
       return {...state, showCounter : !state.showCounter };
   }
   return state;
