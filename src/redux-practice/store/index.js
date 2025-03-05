@@ -16,7 +16,14 @@ const counterReducer = (state = initialState, action) => {
   console.log("prev-state :", state);
   console.log("action :", action);
 
-  return { count: state.count + 10 };
+  switch (action.type) {
+    case "INCREMENT":
+      return { count: state.count + 10 };
+
+    case "DECREMENT":
+      return { count: state.count - 10 };
+    default: return state;
+  }
 };
 
 // 리덕스는 단 하나의 스토어만 사용 (앱당 하나)
