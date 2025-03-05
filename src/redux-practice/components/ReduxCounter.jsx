@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./ReduxCounter.module.css";
-import { counterActions } from "../store";
+import { increment, decrement, multiply, toggle } from "../store/counterSlice";
 
 const ReduxCounter = () => {
   // 리덕스가 관리하는 상태값을 관리하기
@@ -9,8 +9,6 @@ const ReduxCounter = () => {
 
   // 리덕스의 상태변경을 위한 함수
   const dispatch = useDispatch();
-
-  const { increment, decrement, multiply, toggle } = counterActions;
 
   const handleIncrease = (e) => {
     // 리덕스에서의 상태값 변경 -> dispatch함수 사용
